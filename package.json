@@ -4,8 +4,8 @@
   "description": "User login app",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js" , 
-    "dev" : "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Nikhil Singh",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "express": "^4.16.4",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.15.6",
+    "memorystore": "^1.6.2",
     "mongoose": "^5.7.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
