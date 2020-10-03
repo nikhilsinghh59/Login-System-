@@ -3,6 +3,7 @@ const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session  = require('express-session');
+var memoryStore = require('memorystore')(session); // use memorystore to avoid memory leakage while session management
 const passport = require('passport');
 
 const app = express();
@@ -26,12 +27,15 @@ app.set('view engine' , 'ejs');
 //Body Parser
 app.use(express.urlencoded({extended : false}));
 
-//Session
+
 app.use(
     session({
       secret: 'secret',
       resave: true,
-      saveUninitialized: true
+      saveUninitialized: true,
+      store : new memoryStore({   ///memorystore
+        checkPeriod: 86400000
+      }),
     })
   );
 
@@ -57,8 +61,9 @@ const routes = require('./routes/index');
 const users = require('./routes/users');
 
 //Set routes
-app.use('/' , routes);
+
 app.use('/users' , users);
+app.use('/' , routes);
 
 const PORT = process.env.PORT || 3000;
 
